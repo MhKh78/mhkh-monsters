@@ -8,7 +8,8 @@ class App extends Component {
     super();
 
     this.state = {
-      monsters: []
+      monsters: [],
+      searchField: ''
     };
   }
 
@@ -24,11 +25,20 @@ class App extends Component {
       .then(response => response.json())
       .then(users => this.setState({ monsters: users }));
   }
+  searchField = e => {
+    this.setState({ searchField: e.target.value });
+  };
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
+      <div className='App'>
+        <header className='App-header'>
+          <input
+            type='search'
+            placeholder='search monsters'
+            onChange={e => this.searchField(e)}
+          />
+          <h1>{this.state.searchField}</h1>
           <CardList monsters={this.state.monsters} />
         </header>
       </div>
